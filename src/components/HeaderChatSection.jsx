@@ -5,6 +5,7 @@ export function HeaderChatSection() {
   return (
     <>
       <div className="flex flex-col items-center justify-center text-center m-4">
+        <div></div>
         <div>
           <Avatar>
             <AvatarImage src="https://randomuser.me/api/port" />

@@ -1,8 +1,9 @@
-export function UserWithBubbleChat({ fullname, messageValue }) {
+export function UserWithBubbleChat({ children }) {
   return (
     <>
-      <div>{fullname}</div>
-      <div className="bg-slate-100 p-4 rounded-md">{messageValue}</div>
+      <div className="flex-col items-end justify-end text-end mb-4">
+        {children}
+      </div>
     </>
   );
 }
