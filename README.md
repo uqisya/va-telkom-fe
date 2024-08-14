@@ -17,6 +17,19 @@ Proyek ini adalah implementasi front-end untuk Virtual Assistant Telkom Indonesi
   - Tampilan isi detail histori percakapan
 
 ## User Interface Example
+- Home Session Screen
+
+<img src="https://github.com/user-attachments/assets/25f8ad2a-7f28-486c-b0dd-87623d9f718e" alt="image" width="200"/> 
+<img src="https://github.com/user-attachments/assets/c2c07e9d-d691-46b7-ba2b-c5b18e718527" alt="image" width="200"/>
+<img src="https://github.com/user-attachments/assets/ee6783ff-0b6a-4b96-a38d-7fd3fc7c026a" alt="image" width="200"/>
+
+- Interaksi & Chat History
+
+<div style="width: 200px;">
+  <video src="https://github.com/user-attachments/assets/bf4cde49-e6f6-4ce9-ab43-0fe9de5f6777" controls="controls" style="width: 100%; height: auto;">
+    Your browser does not support the video tag.
+  </video>
+</div>
 
 
 ## Project Structure
@@ -76,8 +89,20 @@ va-telkom-fe/
     npm run dev
     ```
 
-    Pastikan Anda juga menjalankan program backend Laravel.
+    Pastikan Anda juga menjalankan program backend Laravel agar API backend berjalan
+    Ubah `api.js` pada folder `services` sesuai dengan url localhost project laravel anda
+    ```plaintext
+    va-telkom-fe/
+    ├── public
+    ├── src/
+    │   ├── services/
+    │   │   └── api.js  <-- check this file
+    │   ├── App.css
+    │   └── ...
+    ├── package.json
+    └── ...
+    ```
 
-4. **Instruksi Backend**:
+5. **Instruksi Backend**:
 
     Lihat instruksi project backend Laravel [di sini](https://github.com/uqisya/va-telkom-be) va-telkom-be.
