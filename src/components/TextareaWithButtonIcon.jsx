@@ -10,28 +10,28 @@ export function TextareaWithButtonIcon({
   // state untuk menyimpan value dari inputan user
   const [inputValue, setInputValue] = useState({
     fullname: "",
-    messageValue: "",
+    message: "",
   });
 
   // fungsi untuk meng-handle perubahan inputan user
   function handleInputChange(e) {
     setInputValue({
       fullname: "Anda",
-      messageValue: e.target.value,
+      message: e.target.value,
     });
   }
 
   // fungsi untuk meng-handle submit pesan dari user
   function handleSubmit(e) {
     e.preventDefault();
-    if (inputValue.messageValue === "") {
+    if (inputValue.message === "") {
       alert("Tidak boleh kosong");
     } else {
       handleMessageSubmit(inputValue);
       // reset inputan user ke empty string
       setInputValue({
         fullname: "",
-        messageValue: "",
+        message: "",
       });
     }
   }
@@ -42,7 +42,7 @@ export function TextareaWithButtonIcon({
         <div className="flex w-full items-center space-x-2 py-2">
           <Textarea
             placeholder={placeholder}
-            value={inputValue.messageValue}
+            value={inputValue.message}
             onChange={handleInputChange}
           />
           <Button type="submit">{children}</Button>

@@ -1,10 +1,11 @@
 import "./App.css";
-import { MainScreen } from "./pages/MainScreen";
+import { ChatScreen } from "./pages/ChatScreen";
+import { HomeSessionScreen } from "./pages/HomeSessionScreen";
 
 function App() {
   return (
     <>
-      <MainScreen />
+      <HomeSessionScreen />
     </>
   );
 }
