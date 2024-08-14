@@ -5,6 +5,8 @@ Proyek ini adalah implementasi front-end untuk Virtual Assistant Telkom Indonesi
 
 ## Features
 
+Video installasi dan demo: [https://youtu.be/xHPWKrdYfGU](https://youtu.be/xHPWKrdYfGU)
+
 - **Tampilan Chat:**
   - Pengguna dapat memasukkan karakter maupun kalimat pada text area
   - Setiap pesan yang ditulis maupun balasan dari server akan ditampilkan ke layar pengguna
@@ -72,6 +74,8 @@ va-telkom-fe/
 
 
 ## Instalasi
+
+Video installasi dan demo: [https://youtu.be/xHPWKrdYfGU](https://youtu.be/xHPWKrdYfGU)
 
 1. **Clone Repository**:
 
