@@ -17,6 +17,10 @@ Proyek ini adalah implementasi front-end untuk Virtual Assistant Telkom Indonesi
   - Tampilan isi detail histori percakapan
 
 ## User Interface Example
+- Brainstorming (wireframe dan referensi)
+
+<img src="https://github.com/user-attachments/assets/5d06a11f-2de8-494b-a196-721a7faec145" alt="image" width="700"/> 
+  
 - Home Session Screen
 
 <img src="https://github.com/user-attachments/assets/25f8ad2a-7f28-486c-b0dd-87623d9f718e" alt="image" width="200"/> 
