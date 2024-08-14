@@ -1,3 +1,9 @@
+/*
+  PROPS
+
+  1. children: component bubble chat
+*/
+
 export function UserWithBubbleChat({ children }) {
   return (
     <>

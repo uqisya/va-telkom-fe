@@ -1,5 +1,11 @@
 import { Button } from "./ui/button";
 
+/*
+  PROPS
+
+  1. faq: object faq yang akan ditampilkan
+  2. handleFaqButton: function untuk handle onClick item button FAQ, untuk trigger button
+*/
 export function CardItemQuestionFaq({ faq, handleFaqButton }) {
   function handleOnClickButton(faq) {
     handleFaqButton(faq);

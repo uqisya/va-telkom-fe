@@ -1,6 +1,13 @@
 import { LogInIcon } from "lucide-react";
 import { Button } from "./ui/button";
 
+/*
+  TERIMA PROPS DARI HOME SCREEN
+
+  1. chatSession: object chat session yang dipilih
+  2. setSelectedChatSession: function untuk simpan chat session yang dipilih ke state 'chatSession'
+*/
+
 export function CardItemChatSessionHistory({
   chatSession,
   setSelectedChatSession,

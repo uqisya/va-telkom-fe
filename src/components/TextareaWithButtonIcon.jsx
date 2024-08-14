@@ -3,12 +3,16 @@ import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
 import { userEnum } from "@/enums/userEnum";
 import { toast } from "sonner";
+import { SendIcon } from "lucide-react";
 
-export function TextareaWithButtonIcon({
-  placeholder,
-  children,
-  handleMessageSubmit,
-}) {
+/*
+  PROPS
+
+  1. placeholder: placeholder untuk textarea
+  2. handleMessageSubmit: fungsi untuk meng-handle submit pesan dari user
+*/
+
+export function TextareaWithButtonIcon({ placeholder, handleMessageSubmit }) {
   // state untuk menyimpan value dari inputan user
   const [inputValue, setInputValue] = useState({
     fullname: "",
@@ -29,6 +33,7 @@ export function TextareaWithButtonIcon({
     if (inputValue.message === "") {
       toast.warning("Pesan tidak boleh kosong.");
     } else {
+      // kirim pesan user ke parent component (ChatScreen)
       handleMessageSubmit(inputValue);
       // reset inputan user ke empty string
       setInputValue({
@@ -47,7 +52,9 @@ export function TextareaWithButtonIcon({
             value={inputValue.message}
             onChange={handleInputChange}
           />
-          <Button type="submit">{children}</Button>
+          <Button type="submit">
+            <SendIcon size={24} className="text-white" />
+          </Button>
         </div>
       </form>
     </>
