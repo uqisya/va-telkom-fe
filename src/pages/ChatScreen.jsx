@@ -28,13 +28,19 @@ export function ChatScreen({ chatSessionID }) {
 
   // set pesan pertama dari asisten ketika halaman pertama kali di-load
   useEffect(() => {
-    async function getFirstChat() {
+    async function getAllChat() {
       setIsLoading(true);
       try {
-        const responseFirstChat = await axios.get(
+        const responseAllChat = await axios.get(
           `http://localhost:8000/api/chats/${chatSessionID}`
         );
-        setNewMessage(responseFirstChat.data.data.chat);
+        const allChat = responseAllChat.data.data.map((response) => {
+          return {
+            fullname: response.chat.fullname,
+            message: response.chat.message,
+          };
+        });
+        setMessages(allChat);
       } catch (error) {
         setError(error.response.data.message);
       }
@@ -52,7 +58,7 @@ export function ChatScreen({ chatSessionID }) {
       setIsLoading(false);
     }
 
-    getFirstChat();
+    getAllChat();
     getFaqs();
   }, [chatSessionID]);
 
@@ -68,7 +74,10 @@ export function ChatScreen({ chatSessionID }) {
     // add faq to user messages
     setMessages((prevmessage) => [
       ...prevmessage,
-      { fullname: "Anda", message: faq.question },
+      {
+        fullname: "Anda",
+        message: faq.question,
+      },
     ]);
 
     // send message to assistant (hit API)
@@ -139,34 +148,30 @@ export function ChatScreen({ chatSessionID }) {
                   />
                 );
               })}
-            </div>
-          )}
-          {messages
-            .filter((value) => {
-              return !(value.fullname === "" && value.message === "");
-            })
-            .map((value, index) => {
-              if (value.fullname === "Anda") {
+              {messages.map((value, index) => {
+                if (value.fullname === "Anda") {
+                  return (
+                    <UserWithBubbleChat key={index}>
+                      <BubbleChat
+                        fullname={value.fullname}
+                        message={value.message}
+                        bgColor="bg-slate-100"
+                      />
+                    </UserWithBubbleChat>
+                  );
+                }
                 return (
-                  <UserWithBubbleChat key={index}>
+                  <AssistantWithBubbleChat key={index}>
                     <BubbleChat
                       fullname={value.fullname}
                       message={value.message}
-                      bgColor="bg-slate-100"
+                      bgColor="bg-red-100"
                     />
-                  </UserWithBubbleChat>
+                  </AssistantWithBubbleChat>
                 );
-              }
-              return (
-                <AssistantWithBubbleChat key={index}>
-                  <BubbleChat
-                    fullname={value.fullname}
-                    message={value.message}
-                    bgColor="bg-red-100"
-                  />
-                </AssistantWithBubbleChat>
-              );
-            })}
+              })}
+            </div>
+          )}
         </div>
         <div className="sticky bottom-0 bg-white">
           <TextareaWithButtonIcon

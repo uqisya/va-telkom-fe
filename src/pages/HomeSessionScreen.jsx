@@ -7,7 +7,7 @@ import { ChatScreen } from "./ChatScreen";
 export function HomeSessionScreen() {
   const [chatSessionsHistory, setChatSessionsHistory] = useState([]);
   const [error, setError] = useState(null);
-  const [newChatSession, setNewChatSession] = useState({});
+  const [chatSession, setChatSession] = useState({});
 
   const [selectedChatSession, setSelectedChatSession] = useState({});
 
@@ -18,6 +18,7 @@ export function HomeSessionScreen() {
       try {
         const response = await axios.get("http://localhost:8000/api/chats");
         setChatSessionsHistory(response.data.data);
+        setSelectedChatSession(response.data.data[0]);
       } catch (error) {
         setError(error.response.data.message);
       }
@@ -33,25 +34,30 @@ export function HomeSessionScreen() {
     setSelectedChatSession(selectedSession[0]);
   }
 
-  async function startNewChatSession() {
+  async function startchatSession() {
     try {
       const response = await axios.post("http://localhost:8000/api/chats");
-      setNewChatSession(response.data.data);
+      setChatSession(response.data.data);
       setShowChatScreen(true);
     } catch (error) {
       setError(error.response.data.message);
     }
   }
 
+  function joinChatSession() {
+    setChatSession(selectedChatSession);
+    setShowChatScreen(true);
+  }
+
   if (showChatScreen) {
-    return <ChatScreen chatSessionID={newChatSession.id} />;
+    return <ChatScreen chatSessionID={chatSession.id} />;
   }
 
   return (
     <>
       <div className="flex flex-col justify-center items-center h-screen">
         <div className="mb-4">
-          <Button onClick={() => startNewChatSession()}>Create New Chat</Button>
+          <Button onClick={() => startchatSession()}>Create New Chat</Button>
         </div>
         <label>Select Session:</label>
         <div className="my-4">
@@ -68,7 +74,7 @@ export function HomeSessionScreen() {
                   );
                 })}
               </select>
-              <Button size="icon">
+              <Button size="icon" onClick={joinChatSession}>
                 <LogInIcon size="16" />
               </Button>
             </>
