@@ -2,6 +2,7 @@ import { LogOutIcon } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
+import telkomIcon from "@/assets/telkom_indonesia.jpg";
 
 export function HeaderChatSection() {
   function handleExitButton() {
@@ -13,7 +14,7 @@ export function HeaderChatSection() {
         <div></div>
         <div>
           <Avatar>
-            <AvatarImage src="https://yt3.googleusercontent.com/Oz7S9wfKxR9T_8HqGkyTLISMLINsIlNjL3yA8QZZpf7Foc7IHDwRz5qgfl1rC5KRi0ig7AgKsQ=s900-c-k-c0x00ffffff-no-rj" />
+            <AvatarImage src={telkomIcon} />
             <AvatarFallback>TI</AvatarFallback>
           </Avatar>
         </div>

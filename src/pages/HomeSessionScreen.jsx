@@ -61,6 +61,7 @@ export function HomeSessionScreen() {
                     <CardItemChatSessionHistory
                       chatSession={chatSession}
                       setSelectedChatSession={joinChatSession}
+                      key={chatSession.id}
                     />
                   </>
                 );
