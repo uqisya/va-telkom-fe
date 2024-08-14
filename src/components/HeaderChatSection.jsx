@@ -8,7 +8,7 @@ export function HeaderChatSection() {
         <div></div>
         <div>
           <Avatar>
-            <AvatarImage src="https://randomuser.me/api/port" />
+            <AvatarImage src="https://yt3.googleusercontent.com/Oz7S9wfKxR9T_8HqGkyTLISMLINsIlNjL3yA8QZZpf7Foc7IHDwRz5qgfl1rC5KRi0ig7AgKsQ=s900-c-k-c0x00ffffff-no-rj" />
             <AvatarFallback>TI</AvatarFallback>
           </Avatar>
         </div>

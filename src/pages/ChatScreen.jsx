@@ -152,6 +152,7 @@ export function ChatScreen({ chatSessionID }) {
                     <BubbleChat
                       fullname={value.fullname}
                       message={value.message}
+                      bgColor="bg-slate-100"
                     />
                   </UserWithBubbleChat>
                 );
@@ -161,6 +162,7 @@ export function ChatScreen({ chatSessionID }) {
                   <BubbleChat
                     fullname={value.fullname}
                     message={value.message}
+                    bgColor="bg-red-100"
                   />
                 </AssistantWithBubbleChat>
               );

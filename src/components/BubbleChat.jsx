@@ -1,8 +1,8 @@
-export function BubbleChat({ fullname, message }) {
+export function BubbleChat({ fullname, message, bgColor }) {
   return (
     <>
       <div>{fullname}</div>
-      <div className="bg-slate-100 p-4 rounded-md">
+      <div className={`${bgColor} p-4 rounded-md`}>
         <p>{message}</p>
       </div>
     </>
