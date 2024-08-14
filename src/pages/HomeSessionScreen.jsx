@@ -55,18 +55,24 @@ export function HomeSessionScreen() {
         </div>
         <label>Select Session:</label>
         <div className="my-4">
-          <select className="mr-4" onChange={handleSelectChange}>
-            {chatSessionsHistory.map((chatSession) => {
-              return (
-                <option key={chatSession.id} value={chatSession.id}>
-                  {chatSession.title}
-                </option>
-              );
-            })}
-          </select>
-          <Button size="icon">
-            <LogInIcon size="16" />
-          </Button>
+          {chatSessionsHistory.length === 0 ? (
+            <p>No chat sessions available</p>
+          ) : (
+            <>
+              <select className="mr-4" onChange={handleSelectChange}>
+                {chatSessionsHistory.map((chatSession) => {
+                  return (
+                    <option key={chatSession.id} value={chatSession.id}>
+                      {chatSession.title}
+                    </option>
+                  );
+                })}
+              </select>
+              <Button size="icon">
+                <LogInIcon size="16" />
+              </Button>
+            </>
+          )}
         </div>
       </div>
     </>
