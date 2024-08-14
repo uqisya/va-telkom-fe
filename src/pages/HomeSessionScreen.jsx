@@ -99,7 +99,7 @@ export function HomeSessionScreen() {
 
   return (
     <>
-      <div className="flex flex-col items-center min-h-screen my-4">
+      <div className="flex flex-col items-center min-h-screen my-4 mb-16">
         <label className="font-semibold">Chat Session History</label>
         <label className="text-sm text-gray-500">Total Chat: {totalChat}</label>
         <div className="m-4">
@@ -121,7 +121,7 @@ export function HomeSessionScreen() {
             </>
           )}
         </div>
-        <div className="sticky bottom-0 bg-white w-full max-w-md p-4">
+        <div className="fixed bottom-0 bg-white w-full max-w-md p-4">
           <Button className="w-full" onClick={() => startchatSession()}>
             Create New Chat
           </Button>
