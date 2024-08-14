@@ -8,17 +8,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { CardItemQuestionFaq } from "@/components/CardItemQuestionFaq";
 import { Skeleton } from "@/components/ui/skeleton";
+import { BASE_URL } from "@/services/api";
+import { userEnum } from "@/enums/userEnum";
+import { toast } from "sonner";
 
 export function ChatScreen({ chatSessionID }) {
-  // ====================================================================================================
   // state untuk chat
   const [newMessage, setNewMessage] = useState({});
   const [messages, setMessages] = useState([]);
-
-  // ====================================================================================================
-
-  // state untuk menyimpan error dari API
-  const [error, setError] = useState(null);
 
   // state untuk menyimpan data faq
   const [faqs, setFaqs] = useState([]);
@@ -32,7 +29,7 @@ export function ChatScreen({ chatSessionID }) {
       setIsLoading(true);
       try {
         const responseAllChat = await axios.get(
-          `http://localhost:8000/api/chats/${chatSessionID}`
+          `${BASE_URL}/chats/${chatSessionID}`
         );
         const allChat = responseAllChat.data.data.map((response) => {
           return {
@@ -42,7 +39,7 @@ export function ChatScreen({ chatSessionID }) {
         });
         setMessages(allChat);
       } catch (error) {
-        setError(error.response.data.message);
+        toast.error(error.response.data.message);
       }
       setIsLoading(false);
     }
@@ -50,10 +47,10 @@ export function ChatScreen({ chatSessionID }) {
     async function getFaqs() {
       setIsLoading(true);
       try {
-        const responseFaq = await axios.get("http://localhost:8000/api/faqs");
+        const responseFaq = await axios.get(`${BASE_URL}/faqs`);
         setFaqs(responseFaq.data.data);
       } catch (error) {
-        setError(error.response.data.message);
+        toast.error(error.response.data.message);
       }
       setIsLoading(false);
     }
@@ -75,14 +72,14 @@ export function ChatScreen({ chatSessionID }) {
     setMessages((prevmessage) => [
       ...prevmessage,
       {
-        fullname: "Anda",
+        fullname: userEnum.CLIENT,
         message: faq.question,
       },
     ]);
 
     // send message to assistant (hit API)
     sendMessageToAssistant({
-      fullname: "Anda",
+      fullname: userEnum.CLIENT,
       message: faq.question,
     });
   }
@@ -92,7 +89,7 @@ export function ChatScreen({ chatSessionID }) {
     // kirim pesan ke API
     try {
       const responseAssistant = await axios.post(
-        `http://localhost:8000/api/chats/${chatSessionID}`,
+        `${BASE_URL}/chats/${chatSessionID}`,
         {
           fullname: value.fullname,
           message: value.message,
@@ -102,7 +99,7 @@ export function ChatScreen({ chatSessionID }) {
       // set pesan balasan dari asisten
       setNewMessage(responseAssistant.data.data.chat);
     } catch (error) {
-      setError(error);
+      toast.error(error.response.data.message);
     }
   }
 
@@ -149,7 +146,7 @@ export function ChatScreen({ chatSessionID }) {
                 );
               })}
               {messages.map((value, index) => {
-                if (value.fullname === "Anda") {
+                if (value.fullname === userEnum.CLIENT) {
                   return (
                     <UserWithBubbleChat key={index}>
                       <BubbleChat

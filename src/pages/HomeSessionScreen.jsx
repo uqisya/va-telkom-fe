@@ -1,13 +1,13 @@
 import { Button } from "@/components/ui/button";
 import axios from "axios";
-import { LogInIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { ChatScreen } from "./ChatScreen";
 import { CardItemChatSessionHistory } from "@/components/CardItemChatSessionHistory";
+import { BASE_URL } from "@/services/api";
+import { toast } from "sonner";
 
 export function HomeSessionScreen() {
   const [chatSessionsHistory, setChatSessionsHistory] = useState([]);
-  const [error, setError] = useState(null);
   const [chatSession, setChatSession] = useState({});
 
   const [showChatScreen, setShowChatScreen] = useState(false);
@@ -16,31 +16,23 @@ export function HomeSessionScreen() {
   useEffect(() => {
     async function getChatSessions() {
       try {
-        const response = await axios.get("http://localhost:8000/api/chats");
+        const response = await axios.get(`${BASE_URL}/chats`);
         setChatSessionsHistory(response.data.data);
         setTotalChat(response.data.data.length);
       } catch (error) {
-        setError(error.response.data.message);
+        toast.error(error.response.data.message);
       }
     }
     getChatSessions();
   }, []);
 
-  function handleSelectChange(event) {
-    const selectedId = parseInt(event.target.value, 10);
-    const selectedSession = chatSessionsHistory.filter(
-      (session) => session.id === selectedId
-    );
-    // setSelectedChatSession(selectedSession[0]);
-  }
-
   async function startchatSession() {
     try {
-      const response = await axios.post("http://localhost:8000/api/chats");
+      const response = await axios.post(`${BASE_URL}/chats`);
       setChatSession(response.data.data);
       setShowChatScreen(true);
     } catch (error) {
-      setError(error.response.data.message);
+      toast.error(error.response.data.message);
     }
   }
 

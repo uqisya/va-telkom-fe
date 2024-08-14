@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
+import { userEnum } from "@/enums/userEnum";
+import { toast } from "sonner";
 
 export function TextareaWithButtonIcon({
   placeholder,
@@ -16,7 +18,7 @@ export function TextareaWithButtonIcon({
   // fungsi untuk meng-handle perubahan inputan user
   function handleInputChange(e) {
     setInputValue({
-      fullname: "Anda",
+      fullname: userEnum.CLIENT,
       message: e.target.value,
     });
   }
@@ -25,7 +27,7 @@ export function TextareaWithButtonIcon({
   function handleSubmit(e) {
     e.preventDefault();
     if (inputValue.message === "") {
-      alert("Tidak boleh kosong");
+      toast.warning("Pesan tidak boleh kosong.");
     } else {
       handleMessageSubmit(inputValue);
       // reset inputan user ke empty string

@@ -6,10 +6,11 @@ import { AssistantWithBubbleChat } from "@/components/AssistantWithBubbleChat";
 import { BubbleChat } from "@/components/BubbleChat";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
-import { listFaq } from "@/data/listFaq";
 import { CardItemQuestionFaq } from "@/components/CardItemQuestionFaq";
 import { Skeleton } from "@/components/ui/skeleton";
+import { BASE_URL } from "@/services/api";
+import { userEnum } from "@/enums/userEnum";
+import { toast } from "sonner";
 
 export function MainScreen() {
   // management pesan baru dari asisten
@@ -28,9 +29,6 @@ export function MainScreen() {
   // array (kumpulan) pesan dari user
   const [userMessages, setUserMessages] = useState([]);
 
-  // state untuk menyimpan error dari API
-  const [error, setError] = useState(null);
-
   // state untuk menyimpan data faq
   const [faqs, setFaqs] = useState([]);
 
@@ -40,10 +38,10 @@ export function MainScreen() {
   async function getFaqs() {
     setIsLoading(true);
     try {
-      const responseFaq = await axios.get("http://localhost:8000/api/faqs");
+      const responseFaq = await axios.get(`${BASE_URL}/faqs`);
       setFaqs(responseFaq.data.data);
     } catch (error) {
-      setError(error.response.data.message);
+      toast.error(error.response.data.message);
     }
     setIsLoading(false);
   }
@@ -51,7 +49,7 @@ export function MainScreen() {
   // set pesan pertama dari asisten ketika halaman pertama kali di-load
   useEffect(() => {
     setNewAssistantMessage({
-      fullname: "Telkom Indonesia",
+      fullname: userEnum.ASSISTANT,
       messageValue: "Hai! Ada yang bisa saya bantu?",
     });
     getFaqs();
@@ -80,12 +78,12 @@ export function MainScreen() {
     // add faq to user messages
     setUserMessages((prevmessage) => [
       ...prevmessage,
-      { fullname: "Anda", messageValue: faq.question },
+      { fullname: userEnum.CLIENT, messageValue: faq.question },
     ]);
 
     // send message to assistant (hit API)
     sendMessageToAssistant({
-      fullname: "Anda",
+      fullname: userEnum.CLIENT,
       messageValue: faq.question,
     });
   }
@@ -94,13 +92,10 @@ export function MainScreen() {
   async function sendMessageToAssistant(value) {
     // kirim pesan ke API
     try {
-      const responseAssistant = await axios.post(
-        "http://localhost:8000/api/chat",
-        {
-          fullname: value.fullname,
-          messageValue: value.messageValue,
-        }
-      );
+      const responseAssistant = await axios.post(`${BASE_URL}/chat`, {
+        fullname: value.fullname,
+        messageValue: value.messageValue,
+      });
 
       // set pesan balasan dari asisten
       setNewAssistantMessage({
@@ -108,7 +103,7 @@ export function MainScreen() {
         messageValue: responseAssistant.data.messageValue,
       });
     } catch (error) {
-      setError(error);
+      toast.error(error.response.data.message);
     }
   }
 
